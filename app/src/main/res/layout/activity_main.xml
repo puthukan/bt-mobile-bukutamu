@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/windowBackground">
+
+    <!-- 1. HEADER / JUDUL BERANDA DI ATAS -->
+    <LinearLayout
+        android:id="@+id/layoutHeader"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="?android:attr/windowBackground"
+        android:elevation="4dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Beranda"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#000000" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kelola data tamu undangan dengan mudah"
+            android:textSize="12sp"
+            android:textColor="#757575"
+            android:layout_marginTop="2dp" />
+    </LinearLayout>
+
+    <!-- 2. KOTAK PENCARIAN & TOMBOL KALENDER -->
+    <LinearLayout
+        android:id="@+id/layoutSearch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        app:layout_constraintTop_toBottomOf="@id/layoutHeader"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="#80808080"
+            android:hint="Cari nama tamu atau tanggal..."
+            android:textColor="#212121"
+            android:textColorHint="#9E9E9e"
+            android:textSize="14sp"
+            android:paddingHorizontal="16dp"
+            android:inputType="text" />
+
+        <ImageButton
+            android:id="@+id/btnCalendar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:background="#80808080"
+            android:src="@android:drawable/ic_menu_my_calendar"
+            app:tint="#FF9800"
+            android:contentDescription="Pilih Tanggal" />
+
+    </LinearLayout>
+
+    <!-- 3. RECYCLERVIEW DAFTAR TAMU (Di atas Bottom Navigation) -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewTamu"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingHorizontal="12dp"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutSearch"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <!-- 4. INDIKATOR LOADING (PROGRESSBAR) -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 5. FLOATING ACTION BUTTON (TAMBAH) -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabTambah"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:contentDescription="Tambah Tamu"
+        android:src="@android:drawable/ic_input_add"
+        app:backgroundTint="#FF9800"
+        app:tint="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 6. BOTTOM NAVIGATION VIEW (MENU BAWAH) -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        android:paddingBottom="8dp"
+        app:itemIconTint="@color/nav_item_color"
+        app:itemTextColor="@color/nav_item_color"
+        app:menu="@menu/bottom_nav_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

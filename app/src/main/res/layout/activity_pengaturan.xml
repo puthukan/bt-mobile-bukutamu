@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/windowBackground">
+
+    <!-- ScrollView agar aman jika layar perangkat kecil / dapat digulir -->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Container Utama di dalam ScrollView -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- 1. JUDUL / HEADER HALAMAN -->
+            <LinearLayout
+                android:id="@+id/layoutHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:background="?android:attr/windowBackground"
+                android:elevation="4dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    text="Pengaturan"
+                    android:text="Pengaturan"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tampilan dan konfigurasi aplikasi"
+                    android:textSize="12sp"
+                    android:textColor="#757575"
+                    android:layout_marginTop="2dp" />
+            </LinearLayout>
+
+            <!-- Card Container Utama Menu Pengaturan -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- MENU 1: Mode Gelap (Menggunakan Switch On/Off) -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="16dp"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:padding="8dp"
+                            android:src="@android:drawable/ic_menu_compass"
+                            app:tint="#FF9800"
+                            android:contentDescription="Mode Gelap" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_marginStart="16dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Mode Gelap"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="#333333" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Sesuaikan tampilan tema aplikasi"
+                                android:textSize="12sp"
+                                android:textColor="#777777"
+                                android:layout_marginTop="2dp" />
+                        </LinearLayout>
+
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:id="@+id/switchDarkMode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <!-- MENU 2: Kode Akses Database -->
+                    <LinearLayout
+                        android:id="@+id/menuKodeAkses"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="16dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:padding="8dp"
+                            android:src="@android:drawable/ic_lock_lock"
+                            app:tint="#4CAF50"
+                            android:contentDescription="Kode Akses" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_marginStart="16dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Kode Akses Database"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="#333333" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Pengaturan token dan koneksi data"
+                                android:textSize="12sp"
+                                android:textColor="#777777"
+                                android:layout_marginTop="2dp" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@android:drawable/ic_media_play"
+                            app:tint="#CCCCCC"
+                            android:contentDescription="Arrow" />
+                    </LinearLayout>
+
+                    <!-- MENU 3: Kelola Notifikasi -->
+                    <LinearLayout
+                        android:id="@+id/menuNotifikasi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="16dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:padding="8dp"
+                            android:src="@android:drawable/ic_menu_manage"
+                            app:tint="#03A9F4"
+                            android:contentDescription="Notifikasi" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_marginStart="16dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Kelola Notifikasi"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="#333333" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Atur pemberitahuan pesan dan jadwal"
+                                android:textSize="12sp"
+                                android:textColor="#777777"
+                                android:layout_marginTop="2dp" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@android:drawable/ic_media_play"
+                            app:tint="#CCCCCC"
+                            android:contentDescription="Arrow" />
+                    </LinearLayout>
+
+                    <!-- MENU 4: Rekapitulasi -->
+                    <LinearLayout
+                        android:id="@+id/menuRekapitulasi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="16dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:padding="8dp"
+                            android:src="@android:drawable/ic_menu_agenda"
+                            app:tint="#9C27B0"
+                            android:contentDescription="Rekapitulasi" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_marginStart="16dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Rekapitulasi"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="#333333" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Ringkasan data tamu dan laporan"
+                                android:textSize="12sp"
+                                android:textColor="#777777"
+                                android:layout_marginTop="2dp" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@android:drawable/ic_media_play"
+                            app:tint="#CCCCCC"
+                            android:contentDescription="Arrow" />
+                    </LinearLayout>
+
+                    <!-- MENU 5: Backup / Restore -->
+                    <LinearLayout
+                        android:id="@+id/menuBackupRestore"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="16dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:padding="8dp"
+                            android:src="@android:drawable/ic_menu_recent_history"
+                            app:tint="#FF5722"
+                            android:contentDescription="Backup" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_marginStart="16dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Backup / Restore"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="#333333" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Cadangkan dan pulihkan data lokal"
+                                android:textSize="12sp"
+                                android:textColor="#777777"
+                                android:layout_marginTop="2dp" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@android:drawable/ic_media_play"
+                            app:tint="#CCCCCC"
+                            android:contentDescription="Arrow" />
+                    </LinearLayout>
+
+                    <!-- MENU 6: Tentang Aplikasi -->
+                    <LinearLayout
+                        android:id="@+id/menuTentang"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="16dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:padding="8dp"
+                            android:src="@android:drawable/ic_menu_info_details"
+                            app:tint="#607D8B"
+                            android:contentDescription="Tentang" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_marginStart="16dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Tentang Aplikasi"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="#333333" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Informasi versi dan pengembang"
+                                android:textSize="12sp"
+                                android:textColor="#777777"
+                                android:layout_marginTop="2dp" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@android:drawable/ic_media_play"
+                            app:tint="#CCCCCC"
+                            android:contentDescription="Arrow" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- 5. BOTTOM NAVIGATION VIEW (MENU BAWAH) -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        android:paddingBottom="8dp"
+        app:itemIconTint="@color/nav_item_color"
+        app:itemTextColor="@color/nav_item_color"
+        app:menu="@menu/bottom_nav_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 1. JUDUL / HEADER HALAMAN -->
+    <LinearLayout
+        android:id="@+id/layoutHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="?android:attr/windowBackground"
+        android:elevation="4dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Grafik Statistik"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#000000" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Statistik hajatan tamu berdasarkan bulan"
+            android:textSize="12sp"
+            android:textColor="#757575"
+            android:layout_marginTop="2dp" />
+    </LinearLayout>
+
+    <!-- 2. KONTEN UTAMA GRAFIK (Berada di bawah Header & di atas Bottom Navigation) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/layoutHeader"
+        android:layout_above="@id/bottomNavigation"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Container Spinner Bulan & Tahun -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginBottom="16dp">
+
+            <Spinner
+                android:id="@+id/spinnerBulan"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"/>
+
+            <Spinner
+                android:id="@+id/spinnerTahun"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
+
+        <!-- Chart -->
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lineChart"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- Label Judul Daftar Tamu -->
+        <TextView
+            android:id="@+id/tvJudulDaftarTamu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Daftar Tamu Bulan Ini:"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="2dp"/>
+
+        <!-- RecyclerView untuk Daftar Tamu di Bawah Grafik -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewTamuGrafik"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <!-- 3. BOTTOM NAVIGATION MENU (Di bagian paling bawah) -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="?android:attr/windowBackground"
+        app:itemIconTint="@color/nav_item_color"
+        app:itemTextColor="@color/nav_item_color"
+        app:menu="@menu/bottom_nav_menu" />
+
+</RelativeLayout>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_beranda"
+        android:icon="@android:drawable/ic_menu_compass"
+        android:title="Beranda" />
+
+    <item
+        android:id="@+id/nav_catatan"
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:title="Catatan" />
+
+    <item
+        android:id="@+id/nav_grafik"
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:title="Grafik" />
+
+    <item
+        android:id="@+id/nav_pengaturan"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="Pengaturan" />
+</menu>

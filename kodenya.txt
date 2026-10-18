@@ -1,0 +1,103 @@
+https://script.google.com/macros/s/AKfycbxL7-Nxn064HXLetaJxdfWtWTjj8zpGhVP_EH5eScajwPeachWrzeOOylfie31Jzl6D/exec
+
+https://script.google.com/macros/s/AKfycbxbdVzUL-U8k-0I8uYlKDX8UEdh5dYZKncISdImkYTriLlkl0CPPbq-_iYjUvUx7ey2/exec
+package com.puthukan.bukutamu
+
+
+kode script
+function doGet(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var data = sheet.getDataRange().getValues();
+  var rows = [];
+  
+  // Mulai dari baris ke-1 (indeks 1) untuk melewati baris header (baris 0)
+  for (var i = 1; i < data.length; i++) {
+    var row = data[i];
+    // Pastikan baris tidak kosong (cek kolom Nama / indeks 1)
+    if (row[1] !== "") { 
+      var obj = {
+        no_id: row[0] || "",
+        nama: row[1] || "",
+        alamat: row[2] || "",
+        nominal_uang: row[3] || "",
+        gawan: row[4] || "",
+        tgl_acara: row[5] || "",
+        keterangan: row[6] || ""
+      };
+      rows.push(obj);
+    }
+  }
+  
+  return ContentService.createTextOutput(JSON.stringify(rows))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+function doPost(e) {
+  var lock = LockService.getScriptLock();
+  lock.tryLock(10000);
+  
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var action = e.parameter.action; // Menangkap aksi: "update", "delete", atau kosong ("insert")
+    
+    // --- 1. FITUR HAPUS DATA (DELETE) ---
+    if (action === "delete") {
+      var noIdTarget = e.parameter.no_id;
+      var data = sheet.getDataRange().getValues();
+      
+      for (var i = 1; i < data.length; i++) {
+        if (data[i][0].toString() === noIdTarget.toString()) {
+          sheet.deleteRow(i + 1); // Baris spreadsheet mulai dari 1
+          return ContentService.createTextOutput(JSON.stringify({"status": "success", "message": "Deleted"}))
+            .setMimeType(ContentService.MimeType.JSON);
+        }
+      }
+      return ContentService.createTextOutput(JSON.stringify({"status": "error", "message": "ID not found"}))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+    
+    // --- 2. FITUR EDIT / UPDATE DATA ---
+    if (action === "update") {
+      var noIdTarget = e.parameter.no_id;
+      var data = sheet.getDataRange().getValues();
+      
+      for (var i = 1; i < data.length; i++) {
+        if (data[i][0].toString() === noIdTarget.toString()) {
+          var rowNum = i + 1;
+          // Kolom: A=no_id(1), B=Nama(2), C=Alamat(3), D=Nominal(4), E=Gawan(5), F=Tanggal(6), G=Keterangan(7)
+          sheet.getRange(rowNum, 2).setValue(e.parameter.nama);
+          sheet.getRange(rowNum, 3).setValue(e.parameter.alamat);
+          sheet.getRange(rowNum, 4).setValue(e.parameter.nominal_uang);
+          sheet.getRange(rowNum, 5).setValue(e.parameter.gawan);
+          sheet.getRange(rowNum, 6).setValue(e.parameter.tgl_acara);
+          sheet.getRange(rowNum, 7).setValue(e.parameter.keterangan);
+          
+          return ContentService.createTextOutput(JSON.stringify({"status": "success", "message": "Updated"}))
+            .setMimeType(ContentService.MimeType.JSON);
+        }
+      }
+      return ContentService.createTextOutput(JSON.stringify({"status": "error", "message": "ID not found"}))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+    
+    // --- 3. FITUR TAMBAH DATA (INSERT - DEFAULT) ---
+    var no_id = "ID-" + new Date().getTime(); // Generate ID unik berbasis waktu
+    var nama = e.parameter.nama;
+    var alamat = e.parameter.alamat;
+    var nominal = e.parameter.nominal_uang;
+    var gawan = e.parameter.gawan;
+    var tgl = e.parameter.tgl_acara;
+    var ket = e.parameter.keterangan;
+    
+    sheet.appendRow([no_id, nama, alamat, nominal, gawan, tgl, ket]);
+    
+    return ContentService.createTextOutput(JSON.stringify({"status": "success", "message": "Inserted"}))
+      .setMimeType(ContentService.MimeType.JSON);
+      
+  } catch (error) {
+    return ContentService.createTextOutput(JSON.stringify({"status": "error", "message": error.toString()}))
+      .setMimeType(ContentService.MimeType.JSON);
+  } finally {
+    lock.releaseLock();
+  }
+}
